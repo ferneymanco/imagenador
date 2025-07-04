@@ -1,27 +1,22 @@
-$(document).ready(function(){
+var paths = [];
+var second = false;
+document.addEventListener('DOMContentLoaded',function(){
 	var vel;
-	var paths = [];
     function config(){
+        const mathCount = 8;
+        return {'_length':mathCount};
     }
     function sleep(ms){
         return new Promise(resolve=> setTimeout(resolve,ms));
     }
     function clear(){
-        $('#first_img').html('');
-        $('#second_img').html('');
+        first_img.innerHTML = '';
+        second_img.innerHTML = '';
     }
 	function start(){
-        
-		paths = [
-			['1a.png','1b.png'],
-			['2a.png','2b.png'],
-			['3a.png','3b.png'],
-			['4a.png','4b.png'],
-			['5a.png','5b.png'],
-			['6a.png','6b.png'],
-			['7a.png','7b.png'],
-			['8a.png','8b.png'],
-		];
+		for (let i = 1; i < config()._length+1; i++) {
+            paths.push([i+'a.png',i+'b.png']);
+        }
 	}
 
     config();
@@ -31,22 +26,44 @@ $(document).ready(function(){
     async function print(){
         clear();
         var img = Math.floor( Math.random() * ( Object.keys( paths ).length-1 ) );
-        $('#first_img').html('<img src="assets/math/'+paths[img][0]+'"/>');
+        first_img.innerHTML = '<img src="assets/math/'+paths[img][0]+'"/>';
         await sleep(vel/2);
-        $('#first_img').html('');
-        $('#second_img').html('<img src="assets/math/'+paths[img][1]+'"/>');
+        first_img.innerHTML = '';
+        second_img.innerHTML = '<img src="assets/math/'+paths[img][1]+'"/>';
         await sleep(vel/2);
-        $('#second_img').html('');
+        second_img.innerHTML ='';
         paths.splice(img,1);
         if(paths.length<1) {
 			start();
-            //return;
 		}
+        print();
     }
 
 	//vel = prompt("Please enter your velocity:", "6")*1000;
+    let first_img = document.getElementById('first_img')
+    let second_img = document.getElementById('second_img')
     //print();
-    vel = 6000; // Default velocity in milliseconds
-    var intervalID = setInterval(print,vel)
+    function nexter(){
+        clear();
+        if (!second){
+            var img = Math.floor( Math.random() * ( Object.keys( paths ).length-1 ) );
+            var img = Math.floor( Math.random() * ( Object.keys( paths ).length-1 ) );
+            first_img.innerHTML = '<img src="assets/math/'+paths[img][0]+'"/>';
+            second = true;
+        }
+
+        if(second){
+            var img = Math.floor( Math.random() * ( Object.keys( paths ).length-1 ) );
+            first_img.innerHTML = '<img src="assets/math/'+paths[img][1]+'"/>';
+            second = false;
+        }
+        paths.splice(img,1);
+        if(paths.length<1) {
+			start();
+		}
+    }
+
+    document.getElementById('next').addEventListener('click', nexter);
 
 });
+
