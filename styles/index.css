@@ -1,0 +1,21 @@
+p{
+    height: 25%;
+    vertical-align: middle;
+}
+div#first_img{
+    /*display: block;*/
+    text-align: center;
+    width: auto;
+    height: auto;
+}
+img{
+    max-width: 400px;
+    height: auto;
+}
+
+div#second_img{
+    /*display: block;*/
+    text-align: center;
+    width: auto;
+    height: auto;
+}
