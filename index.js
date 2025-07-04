@@ -22,7 +22,7 @@ function shuffleArray(array) {
 document.addEventListener('DOMContentLoaded',function(){
 	var vel;
     function config(){
-        const mathCount = 8;
+        const mathCount = 18;
         let numbers = [];
         for (let i = 1; i < mathCount+1; i++) {
             numbers.push(i);
