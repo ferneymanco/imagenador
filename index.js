@@ -44,8 +44,9 @@ $(document).ready(function(){
 		}
     }
 
-	vel = prompt("Please enter your velocity:", "6")*1000;
+	//vel = prompt("Please enter your velocity:", "6")*1000;
     //print();
+    vel = 6000; // Default velocity in milliseconds
     var intervalID = setInterval(print,vel)
 
 });
