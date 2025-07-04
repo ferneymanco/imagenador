@@ -1,69 +1,81 @@
-var paths = [];
 var second = false;
+var indexes = [];
+var index = 0;
+
+function shuffleArray(array) {
+  let currentIndex = array.length;
+  let randomIndex;
+
+  // While there remain elements to shuffle.
+  while (currentIndex !== 0) {
+    // Pick a remaining element.
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex--;
+
+    // And swap it with the current element.
+    [array[currentIndex], array[randomIndex]] = [array[randomIndex], array[currentIndex]];
+  }
+
+  return array;
+}
+
 document.addEventListener('DOMContentLoaded',function(){
 	var vel;
     function config(){
         const mathCount = 8;
-        return {'_length':mathCount};
+        let numbers = [];
+        for (let i = 1; i < mathCount+1; i++) {
+            numbers.push(i);
+        }
+        shuffleArray(numbers);
+        return {
+            'numbers': numbers,
+        };
     }
+
     function sleep(ms){
         return new Promise(resolve=> setTimeout(resolve,ms));
     }
+
     function clear(){
         first_img.innerHTML = '';
         second_img.innerHTML = '';
     }
+    
 	function start(){
-		for (let i = 1; i < config()._length+1; i++) {
-            paths.push([i+'a.png',i+'b.png']);
-        }
-	}
-
-    config();
-
-	start();
-
-    async function print(){
-        clear();
-        var img = Math.floor( Math.random() * ( Object.keys( paths ).length-1 ) );
-        first_img.innerHTML = '<img src="assets/math/'+paths[img][0]+'"/>';
-        await sleep(vel/2);
-        first_img.innerHTML = '';
-        second_img.innerHTML = '<img src="assets/math/'+paths[img][1]+'"/>';
-        await sleep(vel/2);
-        second_img.innerHTML ='';
-        paths.splice(img,1);
-        if(paths.length<1) {
-			start();
-		}
-        print();
+		indexes = config().numbers;
     }
 
-	//vel = prompt("Please enter your velocity:", "6")*1000;
     let first_img = document.getElementById('first_img')
     let second_img = document.getElementById('second_img')
-    //print();
+
     function nexter(){
+
         clear();
-        if (!second){
-            var img = Math.floor( Math.random() * ( Object.keys( paths ).length-1 ) );
-            var img = Math.floor( Math.random() * ( Object.keys( paths ).length-1 ) );
-            first_img.innerHTML = '<img src="assets/math/'+paths[img][0]+'"/>';
+
+        if(index === 0){
+            index = indexes.pop();
+        }
+        
+        if (second === false){
+            first_img.innerHTML = '<img src="assets/math/'+index+'a.png" style="height=250px; width: auto;"/>';
             second = true;
+            return;
         }
 
         if(second){
-            var img = Math.floor( Math.random() * ( Object.keys( paths ).length-1 ) );
-            first_img.innerHTML = '<img src="assets/math/'+paths[img][1]+'"/>';
+            second_img.innerHTML = '<img src="assets/math/'+index+'b.png" style="height=250px; width: auto;"/>';
             second = false;
+            index = 0;
+            if(indexes.length<1) {
+                start();
+            }
         }
-        paths.splice(img,1);
-        if(paths.length<1) {
-			start();
-		}
+        
     }
 
-    document.getElementById('next').addEventListener('click', nexter);
-
+    document.getElementById('cursor').addEventListener('click', nexter);
+    
+    start();
 });
 

@@ -5,10 +5,18 @@
 </head>
 <body>
 
-<p id="workspace">
-	<div id="first_img"></div>
-	<div id="second_img"></div>
-	<div style="text-align: center; margin-top: 3em;"><button id="next">NEXT</button></div>
-</p>
+<div id="workspace">
+	<div id="first_img" style="z-index: 0;"></div>
+	<div id="second_img" style="z-index: 0;"></div>
+</div>
+
+<div id="cursor" 
+	style="position: fixed;
+	top:0%; left:25%;
+	min-width: 50%;
+	height: 95%;
+	z-index: 1;
+	border: solid gray 1px;"
+>NEXT</div>
 
 </body>
