@@ -41,7 +41,7 @@ document.addEventListener('DOMContentLoaded',function(){
         first_img.innerHTML = '';
         second_img.innerHTML = '';
     }
-    
+
 	function start(){
 		indexes = config().numbers;
     }
@@ -74,7 +74,12 @@ document.addEventListener('DOMContentLoaded',function(){
         
     }
 
-    document.getElementById('cursor').addEventListener('click', nexter);
+    setTimeout(
+        function(){    
+            document.getElementById('cursor').addEventListener('click', nexter);
+        },
+        500
+    );
     
     start();
 });
