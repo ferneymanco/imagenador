@@ -84,3 +84,9 @@ document.addEventListener('DOMContentLoaded',function(){
     start();
 });
 
+function setting(){
+    console.log('setting');
+    let setter = document.getElementById('setter_popup');
+    setter.style.display = 'block';
+}
+
