@@ -2,9 +2,46 @@
     vertical-align: middle;
 }
 
-
 div#second_img,div#first_img{
     text-align: center;
     width: auto;
     height: auto;
+}
+
+#cursor{
+    position: fixed;
+	top:0%; left:25%;
+	min-width: 50%;
+	height: 95%;
+	z-index: 1;
+}
+
+#setter{
+    position: fixed;
+	top:0%; left:0%;
+	min-width: 1em;
+	height: 1em;
+	z-index: 10;
+	border: solid gray 1px;
+	border-radius: 50%;
+}
+
+#setter_popup{
+    position: fixed;
+	display: none;
+	top:25%; left:25%;
+	min-width: 25%;
+	z-index: 1000;
+    padding: 1em;
+}
+
+.category-title{
+    text-transform: capitalize;
+}
+
+.subcategory-button{
+    margin: 1em;
+    height: 40px;
+    border: solid 1px green;
+    background-color: #a5eba545;
 }
